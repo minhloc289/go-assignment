@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Node
+node_modules
+npm-debug.log
+yarn.lock
+pnpm-lock.yaml
+
+# Laravel
+vendor
+storage/logs
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+.env
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+Dockerfile*
+
+# System / IDE
+.DS_Store
+Thumbs.db
+.vscode
+.idea
