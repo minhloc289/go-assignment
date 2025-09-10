@@ -12,6 +12,7 @@ import {
   Legend,
   ChartOptions,
 } from 'chart.js';
+import { API_BASE_URL } from "../constants";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -35,7 +36,7 @@ export default function Report() {
   useEffect(() => {
     const fetchReport = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/report");
+        const response = await fetch(`${API_BASE_URL}/report`);
         if (!response.ok) {
           throw new Error("Lỗi khi lấy dữ liệu báo cáo");
         }

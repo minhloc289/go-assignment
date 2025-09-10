@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import PageMeta from "../../components/common/PageMeta";
+import { API_BASE_URL } from "../../constants";
+
 
 export default function Home() {
   const [top10, setTop10] = useState<any[]>([]);
@@ -11,7 +13,7 @@ export default function Home() {
     const fetchTop10 = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:8000/api/top10-group-a");
+        const response = await fetch(`${API_BASE_URL}/top10-group-a`);
         if (!response.ok) {
           throw new Error("Lỗi khi lấy dữ liệu top 10");
         }

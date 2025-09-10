@@ -1,6 +1,8 @@
 import { useState } from "react";
 import PageBreadcrumb from "../components/common/PageBreadCrumb";
 import PageMeta from "../components/common/PageMeta";
+import { API_BASE_URL } from "../constants";
+
 
 export default function UserRegistration() {
   const [registrationNumber, setRegistrationNumber] = useState("");
@@ -15,7 +17,7 @@ export default function UserRegistration() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/api/check-score", {
+      const response = await fetch(`${API_BASE_URL}/check-score`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
