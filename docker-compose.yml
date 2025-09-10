@@ -1,0 +1,52 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/var/www
+    environment:
+      DB_HOST: mysql
+      DB_DATABASE: gscores
+      DB_USERNAME: root
+      DB_PASSWORD: ""
+    depends_on: 
+      - mysql
+    ports:
+      - 8000:8000
+    networks:
+      - app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - 5173:5173
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+    networks:
+      - app
+    
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: gscores
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app
+
+volumes:
+  mysql_data:
+
+networks:
+  app:
+    driver: bridge

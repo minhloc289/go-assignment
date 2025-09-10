@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router";
-import LineChart from "./pages/Charts/LineChart";
-import Blank from "./pages/Blank";
 import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
@@ -14,19 +12,14 @@ export default function App() {
       <Router>
         <ScrollToTop />
         <Routes>
-          {/* Dashboard Layout */}
           <Route element={<AppLayout />}>
-            <Route index path="/" element={<Home />} />
 
+            <Route index path="/" element={<Home />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/search" element={<SearchScores />} />
-            <Route path="/blank" element={<Blank />} />
-
-            {/* Charts */}
             <Route path="/report" element={<Report />} />
-          </Route>
 
-          {/* Fallback Route */}
+          </Route>
         </Routes>
       </Router>
     </>

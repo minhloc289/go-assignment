@@ -1,0 +1,24 @@
+# .dockerignore
+
+# Build artifacts and temporary files
+build
+dist
+.env
+.DS_Store
+
+# Version control
+.git
+.gitignore
+
+# Node.js specific
+node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Editor and IDE configurations
+.vscode
+.idea
+*.sublime-project
+*.sublime-workspace

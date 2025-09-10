@@ -10,12 +10,25 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartOptions,
 } from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+// Define interfaces for better type safety
+interface Stats {
+  [subject: string]: {
+    [label: string]: number;
+  };
+}
+
+interface ApiResponse {
+  stats: Stats;
+  labels: string[];
+}
+
 export default function Report() {
-  const [stats, setStats] = useState<any>(null);
+  const [stats, setStats] = useState<Stats | null>(null);
   const [labels, setLabels] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
 
@@ -26,7 +39,7 @@ export default function Report() {
         if (!response.ok) {
           throw new Error("Lỗi khi lấy dữ liệu báo cáo");
         }
-        const data = await response.json();
+        const data: ApiResponse = await response.json();
         setStats(data.stats);
         setLabels(data.labels);
       } catch (err: any) {
@@ -48,7 +61,6 @@ export default function Report() {
     dia_li: "Geography",
     gdcd: "Civic Education",
   };
-
 
   const colors = [
     'rgba(59, 130, 246, 0.8)',   // Blue (Math)
@@ -76,18 +88,19 @@ export default function Report() {
       : [],
   };
 
-  const chartOptions = {
+  // Fix TypeScript errors by properly typing chartOptions
+  const chartOptions: ChartOptions<'bar'> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top' as const,
+        position: 'top',
         labels: {
           padding: 20,
           usePointStyle: true,
           font: {
             size: 12,
-            weight: '500',
+            weight: 'bold',
           }
         }
       },
@@ -122,7 +135,7 @@ export default function Report() {
           text: 'Number of candidates',
           font: {
             size: 12,
-            weight: '500',
+            weight: 'bold',
           }
         },
         ticks: {
