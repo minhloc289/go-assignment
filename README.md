@@ -34,7 +34,7 @@ webdev-intern-assignment-3/
 
 ```bash
 git clone https://github.com/minhloc289/go-assignment.git
-cd webdev-intern-assignment-3
+cd go-assignment
 ```
 
 ### 2. Configure Environment Variables
