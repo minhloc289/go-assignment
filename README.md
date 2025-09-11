@@ -101,8 +101,7 @@ The project is deployed using [Railway](https://railway.com/), covering frontend
 
 ## Demo
 
-- 🌐 Live Demo: [https://example.com](https://example.com)
-- 🎥 Video Walkthrough: [Watch on YouTube](https://youtu.be/your-demo-link)
+- 🌐 Live Demo: [Demo](https://drive.google.com/drive/folders/1Io7C7YIykrLI60iwpKZIAtm6M038Eiw0)
 
 ### Screenshots
 
