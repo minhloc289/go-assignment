@@ -106,9 +106,16 @@ The project is deployed using [Railway](https://railway.com/), covering frontend
 
 ### Screenshots
 
-![Homepage Screenshot](https://github.com/minhloc289/go-assignment/blob/main/pictures/Homepage.png
+1. Homepage Screenshot
+![Homepage Screenshot](https://github.com/minhloc289/go-assignment/blob/main/pictures/Homepage.png)
+
+2. Check Score Screenshot
 ![Check Score Screenshot](https://github.com/minhloc289/go-assignment/blob/main/pictures/CheckScore.png)
+
+3. Report Chart Screenshot
 ![Report Chart Screenshot](https://github.com/minhloc289/go-assignment/blob/main/pictures/Report.png)
+
+4. Railway Deployment
 ![Railway Deployment](https://github.com/minhloc289/go-assignment/blob/main/pictures/DeploymenScreenshot.png)
 ---
 
