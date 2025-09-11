@@ -14,7 +14,7 @@ class ScoreSeeder extends Seeder
      */
     public function run(): void
     {
-        $filePath = storage_path('app/public/diem_thi_thpt_2024.csv');
+        $filePath = base_path('database/seeders/data/diem_thi_thpt_2024.csv');
         if (!file_exists($filePath)) {
             throw new \Exception('CSV file not found');
         }
