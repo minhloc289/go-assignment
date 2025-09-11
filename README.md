@@ -33,8 +33,8 @@ webdev-intern-assignment-3/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/GoldenOwlAsia/webdev-intern-assignment-3.git
-cd webdev-intern-assignment-3
+git clone https://github.com/minhloc289/go-assignment.git
+cd go-assignment
 ```
 
 ### 2. Configure Environment Variables
@@ -50,6 +50,7 @@ cd webdev-intern-assignment-3
   ```
 
   Ensure the `DB_*` configs match the database credentials from the root `.env`.
+
 
 * **Frontend**:
 
