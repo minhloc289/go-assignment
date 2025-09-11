@@ -33,7 +33,7 @@ webdev-intern-assignment-3/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/GoldenOwlAsia/webdev-intern-assignment-3.git
+git clone https://github.com/minhloc289/go-assignment.git
 cd webdev-intern-assignment-3
 ```
 
