@@ -20,6 +20,7 @@ export default defineConfig({
     port: 5173,
     watch: {
       usePolling: true,
-    }
+    },
+    allowedHosts: ['happy-vibrancy-production.up.railway.app'],
   }
 });
