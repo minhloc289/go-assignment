@@ -1,61 +1,107 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# G-Scores Backend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The **G-Scores Backend** is a Laravel-based REST API service that provides comprehensive student score management and analytics for the Vietnam National High School Graduation Examination (THPT) 2024 data.
 
-## About Laravel
+## Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This backend service is part of the G-Scores project (Golden Owl Asia Assignment) and serves as the data processing engine and API provider for student examination scores. It handles data import, storage, and provides various analytical endpoints to support the frontend application.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Built with modern Laravel practices, the backend emphasizes clean architecture, performance, and scalability while providing robust APIs for score analysis and student data retrieval.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Core Functionality
+- **Data Import System**: Automated import of `diem_thi_thpt_2024.csv` into database using Laravel migrations and seeders
+- **Score Search**: Fast lookup of student scores by registration number (SBD - Số báo danh)
+- **Statistical Analysis**: Student distribution analytics across different score ranges
+- **Top Performers**: Ranking system for top students by subject combinations
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### API Endpoints
+- **Student Score Lookup**: Search individual student results by registration number
+- **Score Distribution**: Get student count distribution by score levels:
+  - Excellent: ≥ 8.0
+  - Good: [6.0 - 8.0)
+  - Average: [4.0 - 6.0)
+  - Below Average: < 4.0
+- **Top 10 Rankings**: Retrieve top-performing students for Subject Group A (Math + Physics + Chemistry)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Technical Features
+- **Full OOP Architecture**: Clean, maintainable object-oriented design
+- **Eloquent ORM**: Efficient database operations with Laravel's built-in ORM
+- **Request Validation**: Robust input validation and sanitization
+- **RESTful APIs**: Standard REST conventions for easy integration
+- **Extensible Design**: Modular structure for easy feature additions
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Backend Folder Structure
 
-### Premium Partners
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   └── Api/
+│   │       └── ScoreController.php     # Main API controller for score operations
+├── Models/
+│   └── Score.php                       # Eloquent model for score data
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+database/
+├── factories/                          # Model factories for testing
+├── migrations/                         # Database schema migrations
+├── seeders/
+│   ├── data/                           # Data files for seeding
+│   ├── DatabaseSeeder.php              # Main seeder orchestrator
+│   └── ScoreSeeder.php                 # Handles CSV data import and processing
 
-## Contributing
+routes/
+├── api.php                             # API route definitions
+├── web.php                             # Web routes (if any)
+└── console.php                         # Artisan command routes
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+config/
+├── app.php                             # Application configuration
+├── database.php                        # Database connection settings
+└── cors.php                            # CORS configuration for API
 
-## Code of Conduct
+storage/
+├── app/
+│   └── public/                         # Public file storage
+└── logs/                               # Application logs
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+tests/
+├── Feature/                            # Feature tests for APIs
+└── Unit/                               # Unit tests for models/services
+```
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Key Components
 
-## License
+### Models
+- **Score.php**: Eloquent model representing student examination scores with relationships and query scopes
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Controllers
+- **ScoreController.php**: Main API controller handling all score-related endpoints with proper error handling and response formatting
+
+### Database
+- **Migrations**: Define the database schema for storing student scores
+- **Seeders**: Handle the import and processing of the CSV examination data
+
+### API Routes
+All API endpoints are prefixed with `/api/` and include:
+- Student score retrieval
+- Statistical distributions
+- Top performer rankings
+
+---
+
+## Development Notes
+
+- The backend is designed to work seamlessly with Docker containerization
+- Database operations are optimized for the large dataset from the THPT 2024 examination
+- API responses follow consistent JSON structure for easy frontend integration
+- Error handling provides meaningful messages for debugging and user feedback
+
+For Docker setup and deployment instructions, please refer to the main project README in the root directory.

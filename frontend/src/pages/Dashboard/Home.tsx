@@ -18,7 +18,17 @@ export default function Home() {
           throw new Error("Lỗi khi lấy dữ liệu top 10");
         }
         const data = await response.json();
-        setTop10(data);
+        
+        // Parse dữ liệu để xử lý float/string và đảm bảo an toàn
+        const parsedData = data.map((student: any) => ({
+          ...student,
+          toan: parseFloat(student.toan) || 0,
+          vat_li: parseFloat(student.vat_li) || 0,
+          hoa_hoc: parseFloat(student.hoa_hoc) || 0,
+          total_group_a: parseFloat(student.total_group_a) || 0,  // Parse total_group_a
+        }));
+        
+        setTop10(parsedData);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -33,6 +43,12 @@ export default function Home() {
     if (rank <= 3) return "text-yellow-600 font-bold";
     if (rank <= 5) return "text-blue-600 font-semibold";
     return "text-gray-600";
+  };
+
+  // Helper function để format điểm (tránh N/A và hiển thị đẹp)
+  const formatScore = (score: number | string | null | undefined): string => {
+    const num = typeof score === 'string' ? parseFloat(score) : (score || 0);
+    return isNaN(num) ? 'N/A' : num.toFixed(1);  // Hiển thị 1 chữ số thập phân
   };
 
   return (
@@ -155,7 +171,7 @@ export default function Home() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-center">
                           <div className="text-lg font-bold text-blue-600">
-                            {student.total || 'N/A'}
+                            {formatScore(student.total_group_a)}
                           </div>
                         </td>
                       </tr>

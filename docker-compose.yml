@@ -5,17 +5,31 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./backend:/var/www
+      - /var/www/vendor
+    env_file:
+      - ./backend/.env
     environment:
       DB_HOST: mysql
-      DB_DATABASE: gscores
-      DB_USERNAME: root
-      DB_PASSWORD: ""
-    depends_on: 
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
       - mysql
     ports:
       - 8000:8000
     networks:
       - app
+    # command: >
+    #   sh -c "
+    #     php artisan config:clear &&
+    #     php artisan migrate --force &&
+    #     php artisan serve --host=0.0.0.0 --port=8000
+    #   "
+    command: tail -f /dev/null
+
+
+
 
   frontend:
     build:
@@ -26,19 +40,21 @@ services:
       - 5173:5173
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     depends_on:
       - backend
     networks:
       - app
-    
+
   mysql:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: gscores
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
     volumes:
-      - mysql_data:/var/lib/mysql
+      - .dbdata:/var/lib/mysql
     ports:
       - "3306:3306"
     networks:

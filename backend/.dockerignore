@@ -1,0 +1,62 @@
+# Git / Version Control
+.git
+.gitignore
+.gitattributes
+
+# IDE / Editor configuration
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Dependencies (these should be installed within the Dockerfile)
+/vendor/
+/node_modules/
+
+# Environment files
+# The production .env file should be managed outside the image (e.g., with Docker secrets or configs)
+.env
+.env.backup
+.env.example
+.env.local
+.env.*.local
+
+# Laravel Log files
+/storage/logs/*.log
+/storage/logs/laravel.log
+/storage/logs/laravel-*.log
+
+# Laravel Cache and Session files
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+!/storage/framework/.gitignore
+
+# Local Development Tools & Dependencies
+Homestead.yaml
+Homestead.json
+Vagrantfile
+/public/hot
+npm-debug.log*
+yarn-error.log
+pnpm-debug.log
+
+# User-uploaded files (these should be stored on a persistent volume)
+/public/storage
+/storage/app/public
+
+# Testing & Code Coverage
+phpunit.xml
+.phpunit.result.cache
+/storage/testing/
+/coverage/
+
+# Local database files for SQLite
+/database/*.sqlite
+/database/database.sqlite

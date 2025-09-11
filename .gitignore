@@ -5,6 +5,10 @@
 # System files
 .DS_Store
 Thumbs.db
+.dbdata
+.env
+frontend/.env
+backend/.env
 
 # Docker
 docker-compose.override.yml

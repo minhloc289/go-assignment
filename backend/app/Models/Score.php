@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Score extends Model
 {
-    /** @use HasFactory<\Database\Factories\ScoreFactory> */
     use HasFactory;
+
+    protected $table = 'scores';
+    protected $primaryKey = 'sbd';
+    public $incrementing = false; 
+    protected $keyType = 'string';
 
     protected $fillable = [
         'sbd',
@@ -22,6 +26,16 @@ class Score extends Model
         'dia_li',
         'gdcd',
         'ma_ngoai_ngu',
+        'total_group_a',
     ];
-    protected $table = 'scores';
+
+    protected static function booted()
+    {
+        static::saving(function ($score) {
+            $score->total_group_a =
+                ($score->toan ?? 0) +
+                ($score->vat_li ?? 0) +
+                ($score->hoa_hoc ?? 0);
+        });
+    }
 }

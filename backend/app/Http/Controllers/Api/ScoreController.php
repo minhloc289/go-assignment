@@ -45,7 +45,7 @@ class ScoreController extends Controller
 
         return response()->json([
             'stats' => $stats,
-            'labels' => ['>=8', '6-8', '4-6', '<4'], // Dùng cho chart
+            'labels' => ['>=8', '6-8', '4-6', '<4'], 
         ]);
     }
 
@@ -54,23 +54,15 @@ class ScoreController extends Controller
      */
     public function top10GroupA()
     {
-        $groupSubjects = $this->subjectManager->getGroupSubjects('A'); // Lấy subjects từ OOP
-
-        if (empty($groupSubjects)) {
-            return response()->json(['error' => 'Group A not supported'], 400);
-        }
-
-        $totalExpr = implode(' + ', $groupSubjects); // Tạo biểu thức tổng: toan + vat_li + hoa_hoc
-
-        $top = Score::select('sbd', ...$groupSubjects)
-            ->selectRaw("($totalExpr) as total")
-            ->whereNotNull($groupSubjects[0]) // toan
-            ->whereNotNull($groupSubjects[1]) // vat_li
-            ->whereNotNull($groupSubjects[2]) // hoa_hoc
-            ->orderByDesc('total')
+        $top = Score::select('sbd', 'toan', 'vat_li', 'hoa_hoc', 'total_group_a')
+            ->whereNotNull('toan')
+            ->whereNotNull('vat_li')
+            ->whereNotNull('hoa_hoc')
+            ->orderByDesc('total_group_a')
             ->limit(10)
             ->get();
 
         return response()->json($top);
     }
+
 }

@@ -1,10 +1,11 @@
-FROM node:22.17.1
+FROM node:20-alpine
 
 # Set working directory
 WORKDIR /app
 
 # Copy package.json và cài dependencies
 COPY package*.json ./
+
 RUN npm install
 
 # Copy toàn bộ source code
