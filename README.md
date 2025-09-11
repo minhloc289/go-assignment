@@ -73,7 +73,15 @@ docker-compose build
 docker-compose up -d
 ```
 
-### 5. Seed Backend Data
+### 5. Generate Application Key
+
+This will generate your Laravel Application Key
+
+```bash
+docker-compose exec backend php artisan key:generate
+```
+
+### 6. Seed Backend Data
 
 This will import **1 million records** from CSV into the database:
 
@@ -81,7 +89,7 @@ This will import **1 million records** from CSV into the database:
 docker-compose exec backend php artisan db:seed
 ```
 
-### 6. Access Application
+### 7. Access Application
 
 * Frontend: [http://localhost:5173](http://localhost:5173)
 * Backend API: [http://localhost:8000](http://localhost:8000)

@@ -15,21 +15,18 @@ services:
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
     depends_on:
-      - mysql
+      mysql: 
+        condition: service_healthy 
     ports:
       - 8000:8000
     networks:
       - app
-    # command: >
-    #   sh -c "
-    #     php artisan config:clear &&
-    #     php artisan migrate --force &&
-    #     php artisan serve --host=0.0.0.0 --port=8000
-    #   "
-    command: tail -f /dev/null
-
-
-
+    command: >
+      sh -c "
+        php artisan config:clear &&
+        php artisan migrate --force &&
+        php artisan serve --host=0.0.0.0 --port=8000
+      "
 
   frontend:
     build:
@@ -59,6 +56,12 @@ services:
       - "3306:3306"
     networks:
       - app
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
 volumes:
   mysql_data:
