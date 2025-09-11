@@ -51,10 +51,6 @@ cd go-assignment
 
   Ensure the `DB_*` configs match the database credentials from the root `.env`.
 
-  rate the Laravel application key:
-  ```bash
-  php artisan key:generate
-  ```
 
 * **Frontend**:
 
